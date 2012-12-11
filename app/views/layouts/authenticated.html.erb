@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MatchU.Me</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="container">
+  <%= flash_notifications -%>
+  <%= render 'shared/navigation' %>
+
+  <div class="row">
+
+	<div class="row">
+	<% if content_for?(:sidebar_nav) or content_for?(:sidebar) %>
+    	<div class="span2">
+			<%= yield :sidebar_nav %>
+			<%= yield :sidebar %>
+    	</div><!--/span-->
+	<% end %>
+		
+	<br/><br/><br/>
+		
+    	<div <% if content_for?(:sidebar_nav) or content_for?(:sidebar) %>class="offset3"<% end %>>			
+			<%= yield :sub_nav %>
+			<div id="main_content"><%= yield %></div>
+			
+		</div>
+	</div>
+	
+  </div>
+
+
+
+</div><!--/.fluid-container-->
+
+</body>
+</html>

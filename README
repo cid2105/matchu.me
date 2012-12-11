@@ -1,0 +1,4 @@
+RECIPES
+["controllers", "email", "gems", "init", "models", "routes", "setup", "views"]
+PREFERENCES
+{:dev_webserver=>"webrick", :database=>"postgresql", :templates=>"erb", :email=>"sendgrid", :authentication=>"omniauth", :omniauth_provider=>"facebook", :authorization=>"cancan", :form_builder=>"none", :starter_app=>"admin_app"}

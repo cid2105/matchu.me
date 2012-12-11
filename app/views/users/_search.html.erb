@@ -1,0 +1,60 @@
+<div class="modal" id="myModal" style="display:none;">
+<div class="modal-header">
+<button class="close" data-dismiss="modal">×</button>
+<h3 class="lead">Search Options</h3>
+</div>
+<div class="modal-body">
+
+
+	<div class="row">
+		<div class="span3">
+			<ul class="nav nav-tabs nav-stacked">
+		          <li class="active"><a data-toggle="tab" href="#lA">Courses</a></li>
+						          <li><a data-toggle="tab" href="#lB">Online/Offline</a></li>
+						          <li><a data-toggle="tab" href="#lC">Proximity</a></li>
+							      <li><a data-toggle="tab" href="#lD">Budget</a></li>
+								</ul>
+							</div>
+							<div class="span8">
+								<div class="tab-content">
+									<div id="lA" class="well tab-pane active">
+										<h6>Select the courses you wish to be tutored in</h6>
+										<hr>
+										 <p><input type="text" courses></p>
+							          </div>
+							          <div id="lB" class="tab-pane well">
+										<h6>Select the preferred means of tutoring</h6>
+										<hr>
+							            <p><div data-toggle="buttons-checkbox" class="btn-group">
+										    <button class="btn btn-primary active">Online</button>
+											<button class="btn btn-primary active">Face to face</button>
+										</div></p>
+							          </div>
+							          <div id="lC" class="tab-pane well">
+										<h6>Select the maximum distance you are willing to travel </h6>
+										<hr>
+							            <p><select class="span1"><option>1</option><select> miles of 
+										me</select></p>
+							          </div>
+							          <div id="lD" class="tab-pane well">												
+													<h6>Select the maximum you are willing to pay </h6>
+													<hr>
+													<p>
+												
+														<%= select(:settings, :wage,  25.step(250, 25).collect{ |i| (i == 250)? "$#{i}+": "$#{i}"}) %>
+													</p>
+							          </div>
+								</div>
+							</div>
+	</div>
+				
+	
+</div>
+
+<div class="modal-footer">
+<a href="#" class="btn"  data-dismiss="modal">Close</a>
+<a href="#" class="btn btn-primary">Save changes</a>
+</div>
+</div>
+
+

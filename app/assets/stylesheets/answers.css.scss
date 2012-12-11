@@ -1,0 +1,32 @@
+// Place all the styles related to the answers controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+li.message {
+    padding-bottom: 0;
+}
+.caret-divider {
+    height: 8px;
+    left: 38px;
+    position: absolute;
+    top: 0;
+    width: 16px;
+}
+li.message, .threads > li, .add_thread {
+    border-bottom: 1px solid #EFEFEF;
+}
+li.comment {
+    border-bottom: 1px solid #DDDDDD;
+    border-top: 1px solid white;
+}
+.base_author {
+    margin-bottom: 10px;
+}
+.author {
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+}
+.base_content {
+    margin-left: 18px;
+}

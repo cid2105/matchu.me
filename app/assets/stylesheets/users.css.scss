@@ -1,0 +1,254 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#wrap {
+    height: auto;
+    overflow: auto;
+    position: relative;
+    width: auto;
+    z-index: 16;
+}
+#bgbox {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 3;
+}
+#bgbox div {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+#bgbox #nextbg {
+    z-index: 3;
+}
+#bgbox #gradbg {
+    z-index: 4;
+}
+#bgbox #overlay {
+    z-index: 5;
+}
+#loader {
+    margin-top: 6%;
+}
+.progress-gbiofin {
+    border: 2px solid white;
+    border-radius: 25px 25px 25px 25px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+    height: 20px;
+}
+.progress-gbiofin .bar {
+    background-color: rgba(0, 175, 219, 0.9) !important;
+    box-shadow: 0 0 0 0 #000000 inset !important;
+    height: inherit;
+}
+.text-white {
+    color: #FFFFFF;
+}
+.text-center {
+    text-align: center;
+}
+.text-shadow {
+    text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.2);
+}
+.trans-mid {
+    background-color: rgba(245, 245, 245, 0.5);
+}
+.trans-full {
+    background-color: rgba(245, 245, 245, 0.04);
+}
+#container {
+    background-color: #FCFCFC;
+}
+
+.sidebar {
+    background-color: #2C2C2C;
+    background-image: -moz-linear-gradient(center top , #888888, #222222);
+    background-repeat: repeat-x;
+    border-radius: 4px 4px 4px 4px;
+    bottom: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+    color: #FFFFFF;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: fixed;
+    top: 0px; //40px;
+	width:220px;
+}
+
+.memlist li.member {
+    -moz-transition: box-shadow 0s ease 0s, opacity 0.3s ease-in-out 0s;
+    cursor: pointer;
+    opacity: 0.7;
+    overflow: hidden;
+    padding: 8px 12px;
+	border-top: 1px solid #CCCCCC;
+}
+.memlist li.member:hover {
+    opacity: 1;
+}
+.memlist li.member.show {
+    background: -moz-linear-gradient(center top , #87E0FD 0%, #53CBF1 40%, #05ABE0 100%) repeat scroll 0 0 transparent;
+    box-shadow: 0 2px 8px 4px rgba(0, 0, 0, 0.3);
+    opacity: 1;
+}
+.memlist li.member .pic {
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 2px solid #FFFFFF;
+    border-radius: 4px 4px 4px 4px;
+    display: block;
+    float: left;
+    height: 64px;
+    width: 64px;
+}
+.memlist li.member .info {
+    display: block;
+    float: left;
+    margin-left: 10px;
+    margin-top: 12px;
+}
+.memlist li.member .info h5 {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+	font-size:10px;
+}
+.memlist li.member .info h6 {
+    color: #FFFFFF;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+	font-size:10px;
+}
+.content {
+    height: auto;
+#    padding-left: 300px;
+}
+.bg-grid {
+    background-image: url("../img/grid.png");
+    background-repeat: repeat-x;
+}
+.social {
+    clear: both;
+    display: block;
+    float: left;
+    height: auto;
+    width: auto;
+}
+.social li {
+    -moz-transition: opacity 0s ease 0s, top 0.2s ease-in-out 0s;
+    display: block;
+    float: left;
+    height: auto;
+    margin-right: 8px;
+    opacity: 0.5;
+    width: auto;
+}
+.social li:hover {
+    opacity: 0.9;
+    position: relative;
+    top: -3px;
+}
+.social li a {
+    display: block;
+    height: inherit;
+    width: inherit;
+}
+.social li.fb .fb-img {
+    background-image: url("http://wbpreview.com/previews/WB009R1U3/img/fb-active.png");
+    background-size: contain;
+    height: 40px;
+    width: 40px;
+}
+.social li.twitter .twitter-img {
+    background-image: url("http://wbpreview.com/previews/WB009R1U3/img/twitter-active.png");
+    background-size: contain;
+    height: 40px;
+    width: 40px;
+}
+.social li.gplus .gplus-img {
+    background-image: url("http://wbpreview.com/previews/WB009R1U3/img/gplus-active.png");
+    background-size: contain;
+    height: 40px;
+    width: 40px;
+}
+#memName {
+    font-size: 70px;
+    height: auto;
+    line-height: 74px;
+    margin-top: 20px;
+    width: 100%;
+}
+#memPost {
+	font-size: 18px;
+	margin-top: 3px;
+	width: 100%;
+}
+ul.contact {
+    overflow: hidden;
+    width: 100%;
+}
+ul.contact li {
+    float: right;
+}
+.langs {
+    background-color: #00AFDB;
+}
+.softs {
+    background-color: #00C24E;
+}
+.os {
+    background-color: #D21242;
+}
+.os, .softs, .langs {
+    -moz-transition: opacity 0.2s ease-in-out 0s;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 0 7px 1px rgba(0, 0, 0, 0.2);
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 8px 0 0;
+    opacity: 0.6;
+    padding: 5px 12px 6px;
+    width: auto;
+}
+.os:hover, .softs:hover, .langs:hover {
+    opacity: 1;
+}
+.head {
+    -moz-transition: margin 0.2s ease-in-out 0s;
+    cursor: pointer;
+}
+.head:hover {
+    margin-left: 10px;
+}
+.foot {
+    box-shadow: 2px 4px 7px 2px rgba(0, 0, 0, 0.2);
+    color: #333333;
+    left: 0;
+    overflow: hidden;
+    padding: 10px 18px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 101;
+}
+.foot a {
+    margin: 3px 5px 3px 0px;
+}
+.borbox {
+    -moz-box-sizing: border-box;
+}
+.vertical-blue {
+    background: -moz-linear-gradient(center top , #7ABCFF 0%, #60ABF8 44%, #4096EE 100%) repeat scroll 0 0 transparent;
+}
+.vertical-white {
+    background: -moz-linear-gradient(center top , #FFFFFF 0%, #F6F6F6 47%, #EDEDED 100%) repeat scroll 0 0 transparent;
+}
+.gblue2 {
+    background: -moz-radial-gradient(center center , ellipse farthest-corner, #87E0FD 0%, #53CBF1 40%, #05ABE0 100%) repeat scroll 0 0 transparent;
+}

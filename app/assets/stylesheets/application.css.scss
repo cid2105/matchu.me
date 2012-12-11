@@ -1,0 +1,323 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_mixins
+ *= require_tree . 
+*/
+.brand {
+  float: left;
+  padding-right: 8px;
+}
+ul.nav {
+  list-style: none;
+  margin: 0 0 2em;
+  padding: 0;
+}
+ul.nav li {
+  display: inline;
+}
+#flash_notice, #flash_alert {
+  padding: 5px 8px;
+  margin: 10px 0;
+}
+#flash_notice {
+  background-color: #CFC;
+  border: solid 1px #6C6;
+}
+#flash_alert {
+  background-color: #FCC;
+  border: solid 1px #C66;
+}
+
+.container .span9 {
+    border-left: 1px solid #EEEEEE;
+    border-right: 1px solid #EEEEEE;
+    margin-left: 0;
+    padding-left: 16.5px;
+    padding-right: 16.5px;
+}
+.container .span3 {
+    padding-right: 16.5px;
+    width: 188.5px;
+}
+.name-title-seperator {
+    color: #333333;
+}
+.alert {
+    margin-bottom: 5px;
+}
+.new-list-text-container {
+    float: left;
+}
+.new-list-photo-container {
+    float: left;
+    margin-left: 40px;
+}
+#photo-box {
+    background-color: #EEEEEE;
+    border-radius: 3px 3px 3px 3px;
+    cursor: pointer;
+    height: 100px;
+    width: 100px;
+}
+#photo-box #camera-box {
+    background-image: url("/assets/camera-f95b7c90bce53ae0a58c84b3b349649e.png");
+    height: 41px;
+    left: 23px;
+    position: relative;
+    top: 29px;
+    width: 54px;
+    z-index: 10;
+}
+#photo-box #camera-text {
+    background-color: #999999;
+    border-radius: 3px 3px 3px 3px;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    left: 25px;
+    position: relative;
+    text-align: center;
+    top: 38px;
+    width: 50px;
+}
+input.file_field {
+    cursor: pointer;
+    height: 100px;
+    opacity: 0;
+    position: absolute;
+    width: 100px;
+    z-index: 20;
+}
+textarea {
+    resize: none;
+}
+.new-list-item-container {
+    float: left;
+    position: relative;
+    width: 300px;
+}
+.list-input-form-left {
+    border: 1px solid #EEEEEE;
+    float: left;
+    padding: 20px;
+    width: 522px;
+}
+.list-input-form-right {
+    border: 1px solid #EEEEEE;
+    float: right;
+    padding: 20px;
+}
+.list-input-form-right ul {
+    list-style-type: none;
+    margin: 0;
+    position: relative;
+}
+.list-input-form-right ul .text-holder {
+    margin-left: 22px;
+}
+.list-input-form-right ul li {
+    border: 1px solid #EEEEEE;
+    margin-bottom: 15px;
+    padding: 5px;
+    position: relative;
+    width: 300px;
+}
+.list-input-form-right ul li h3 {
+    color: #0088CC;
+    margin-bottom: 3px;
+}
+.list-input-form-right ul li .handle {
+    color: #EEEEEE;
+    cursor: move;
+    font-size: 12px;
+    height: 18px;
+    margin-top: -9px;
+    position: absolute;
+    top: 50%;
+}
+.list-input-form-right ul li .description {
+    color: #555555;
+}
+.counter {
+    font-size: 10px;
+}
+#error_explanation {
+    color: #FF0000;
+}
+#error_explanation ul {
+    list-style: none outside none;
+    margin: 0 0 18px;
+}
+.field_with_errors input, .field_with_errors textarea {
+    border-color: #B94A48;
+    border-width: 2px;
+    color: #B94A48;
+}
+.field_with_errors input:focus, .field_with_errors select:focus, .field_with_errors textarea:focus {
+    border-color: #953B39;
+    box-shadow: 0 0 6px #D59392;
+}
+#fb-login-button {
+    background: -moz-linear-gradient(center top , #3B5998 0%, #3B5998 50%, #325190 50%, #325190 100%) repeat scroll 0 0 transparent;
+    border-radius: 5px 5px 5px 5px;
+    display: block;
+    height: 37px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+}
+#fb-login-button .logo-wrapper {
+    border-right: 1px solid #2F4F85;
+    float: left;
+    margin-top: 7px;
+    padding: 3px 12px;
+}
+#fb-login-button .logo-wrapper .logo {
+    background: url("/assets/facebook_icon-f6c1b581a8933592dc883017d78acaae.png") no-repeat scroll 0 0 transparent;
+    float: left;
+    height: 20px;
+    width: 10px;
+}
+#fb-login-button .facebook-text {
+    border-left: 1px solid #627BA8;
+    color: white;
+    float: left;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 7px;
+    min-height: 20px;
+    padding: 3px 12px;
+}
+.logo-on-homepage {
+    background: url("/assets/logo-9475914e229acd830d309fd92c09469a.png") no-repeat scroll 0 0 transparent;
+    height: 39px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    width: 130px;
+}
+.guide {
+    border-top: 1px solid #EAEAEA;
+    margin: 20px 0;
+    padding: 20px 0 10px;
+    width: 938px;
+}
+ul.guide_items {
+    display: inline-block;
+    overflow: hidden;
+    width: 938px;
+}
+ul.guide_items li {
+    float: left;
+}
+li.guide_item_1 {
+    width: 339px;
+}
+ul.guide_items li.guide_item_3 {
+    float: right;
+}
+ul.guide_items li .title {
+    font-weight: bold;
+    margin-bottom: 4px;
+    margin-top: 14px;
+    text-transform: uppercase;
+}
+ul.guide_items li p {
+    margin-bottom: 5px;
+    width: 260px;
+}
+ul.guide_items img {
+    margin-bottom: 15px;
+}
+.see_more {
+    display: block;
+    float: left;
+    margin-top: 0;
+    text-transform: uppercase;
+    width: 200px;
+}
+.facebook-facepile {
+    margin-bottom: 25px;
+}
+.stats {
+    overflow: auto;
+}
+.stats a {
+    border-left: 1px solid #999999;
+    float: left;
+    padding: 0 10px;
+}
+.stats a:first-child {
+    border: 0 none;
+    padding-left: 0;
+}
+.stats strong {
+    display: block;
+}
+.table-striped tbody tr.highlight:nth-child(2n+1) td {
+    background-color: #FFFDC4;
+}
+.table-striped tbody tr.highlight:nth-child(2n) td {
+    background-color: #FFFDC4;
+}
+.current-column {
+    background-position: right center;
+    background-repeat: no-repeat;
+    padding-right: 12px;
+}
+.asc {
+    background-image: url("/assets/up_arrow-58d3584707d7784a08b32827b4b1d3e5.gif");
+}
+.desc {
+    background-image: url("/assets/down_arrow-717e9ec8276a81ad401b63ffe38ed6f8.gif");
+}
+.profile-main-photo-container {
+    overflow: hidden;
+}
+#list-count {
+    color: #0088CC;
+}
+.score-container {
+    border-top: 1px solid #EEEEEE;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    padding-top: 5px;
+}
+.score-container h4 {
+    color: #0088CC;
+    margin-bottom: 12px;
+}
+.score-container h1 {
+    line-height: 30px;
+}
+.friend-unit {
+    margin-bottom: 7px;
+}
+.friend-unit .friend-photo {
+    float: left;
+    margin-right: 10px;
+}
+.friend-unit .friend-name a
+{
+	position:relative;
+	top:12px;
+}
+.friend-unit .friend-name .follow_form {
+    float: right;
+}
+.float-break {
+    clear: both;
+}
+.share-stack-container {
+    height: 300px;
+    overflow: scroll;
+}
+
