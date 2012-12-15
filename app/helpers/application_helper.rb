@@ -4,8 +4,10 @@ module ApplicationHelper
 
       if message
         type = flash.keys[0].to_s
-
-        javascript_tag %Q{noty({ text:"#{message}", type:"#{type}", timeout : 1500});}
+        javascript_tag %Q{noty({ text:"#{message}", type:"#{type}", layout:"bottom", theme: 'defaultTheme', timeout : 1500});}
       end
   	end
+
+  	
+
 end

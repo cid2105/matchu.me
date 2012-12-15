@@ -11,7 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap.min.js
+//= require token_input
 //= require_tree .
 //= require_self
 
@@ -19,6 +19,8 @@ $(document).ready(function() {
   /* Activating Best In Place */
 	//jQuery(".best_in_place").best_in_place();
 	$("[rel*='popover']").popover();
+	$("[rel*='captify']").captify();
+	$("[rel*='tooltip']").tooltip();
 	$('.dropdown-toggle').dropdown();
 	$('.combobox').combobox();
 	$('.dropdown form').on('click', function (e) {

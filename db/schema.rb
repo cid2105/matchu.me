@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211133229) do
+ActiveRecord::Schema.define(:version => 20121215231014) do
+
+  create_table "likes", :force => true do |t|
+    t.integer  "liker_id"
+    t.integer  "likee_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "matches", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "match_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -29,8 +43,11 @@ ActiveRecord::Schema.define(:version => 20121211133229) do
     t.string   "email"
     t.string   "provider"
     t.string   "uid"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.text     "friends"
+    t.text     "unseen"
+    t.integer  "index",      :default => 0
   end
 
   create_table "users_roles", :id => false, :force => true do |t|
@@ -39,5 +56,12 @@ ActiveRecord::Schema.define(:version => 20121211133229) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
+
+  create_table "views", :force => true do |t|
+    t.integer  "viewer_id"
+    t.integer  "viewed_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

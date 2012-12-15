@@ -360,7 +360,9 @@
 	padding: 2px;
 	margin: 0;
 	display:block;
-	float: left;
+	left: 320px !important;
+    top: 35px !important;
+    width: 233px;
 }
 .ui-menu .ui-menu {
 	margin-top: -3px;

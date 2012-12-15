@@ -37,8 +37,12 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem "pg", ">= 0.14.1"
+gem 'pg_search'
 gem "sendgrid", ">= 1.0.1"
 gem "omniauth", ">= 1.1.1"
 gem "omniauth-facebook"
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
+gem "koala"
+gem 'resque', :require => "resque/server"
+

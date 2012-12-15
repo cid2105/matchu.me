@@ -5,8 +5,19 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :user_signed_in?
   helper_method :correct_user?
+  helper_method :uid_to_thumbnail
+  helper_method :uid_to_image
+
+  def uid_to_thumbnail(uid)
+    uid_to_image uid, "square"
+  end
+
+  def uid_to_image(uid, size)
+    "http://graph.facebook.com/#{uid}/picture?type=#{size}"
+  end
 
   private
+
     def current_user
       begin
         @current_user ||= User.find(session[:user_id]) if session[:user_id]

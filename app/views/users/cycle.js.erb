@@ -1,0 +1,4 @@
+$("img[center]").attr("uid", "<%= @center_image_uid %>").attr("src", "http://graph.facebook.com/<%= @center_image_uid %>/picture?type=large");
+$("ul.thumbnails").html("<%= j render "home/thumbs", :thumb_uids => @thumb_uids %>");
+
+
