@@ -28,7 +28,8 @@
 
               <% end %>
               
-              <li><a href="<%= signout_path %>">Sign Out</a></li>
+              <li><a data-toggle="modal" href="#settings_modal"><i class="icon-cog"></i> Settings</a></li>
+              <li><%= link_to signout_path do %><i class="icon-share"></i> Log Out<% end %></li>
               
 
             </ul>

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :correct_user?, :only => [:edit, :update]
+  before_filter :correct_user?, :only => [:edit, :update, :destroy]
   # after_filter :reinit_cycle, :only => [:like, :prev, :next]
 
   def like
@@ -77,6 +77,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to root_path
   end
 
   def reinit_cycle

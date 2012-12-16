@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
   end
 
   def is_new_match?(likee)
-    (likee.likes? self and not self.matches.pluck("match_id").include? likee.id)
+    (likee.likes? self and not self.matches.pluck("match_id").include? likee.id and likee.id != self.id)
   end
 
   def view!(other)
