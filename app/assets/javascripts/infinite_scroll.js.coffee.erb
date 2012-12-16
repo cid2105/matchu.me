@@ -1,0 +1,11 @@
+jQuery ->
+
+	getDocHeight = ->
+	  D = document
+	  Math.max Math.max(D.body.scrollHeight, D.documentElement.scrollHeight), Math.max(D.body.offsetHeight, D.documentElement.offsetHeight), Math.max(D.body.clientHeight, D.documentElement.clientHeight)
+	
+	$(window).scroll ->
+		url = $('.pagination .next_page').attr('href')
+		if url && ($(window).scrollTop() > getDocHeight() - $(window).height() - 60)
+			$(".pagination").html "<img src='<%= asset_path('loading.gif') %>' class='offset3'/>"
+			$.getScript(url)

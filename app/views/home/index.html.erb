@@ -12,8 +12,9 @@
 <div class="score-container">
   <a href="/users/ipk9vr4j/following"><h4>Matches (<%= current_user.matches.count %>)</h4></a> 
 	<div id="matches">
-		<%= render :partial => 'users/match', :collection => @matches, :as => :match %>
+		<%= render :partial => 'users/match', :collection => @matches, :as => :match %>		
 	</div>
+	<%= will_paginate @matches %>
 </div>
   </div>
 
@@ -50,7 +51,7 @@
 
                  	<div class="polaroid">
 						<h6><%= @user %></h6>
-						<img title="<%= @user %>" data-content="<%= @user.education %><br/><br/><%= @user.major %>" rel="popover" uid="<%= @center_image_uid %>" src="http://graph.facebook.com/<%= @center_image_uid %>/picture?type=large" center>
+						<img title="<%= @user %>" data-content="<%= @user.education %><br/><br/>Major: <%= @user.major %>" rel="popover" uid="<%= @center_image_uid %>" src="http://graph.facebook.com/<%= @center_image_uid %>/picture?type=large" center>
 					</div>
 
         </div>

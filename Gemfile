@@ -48,4 +48,4 @@ gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
 gem "koala"
 gem 'resque', :require => "resque/server"
-
+gem "will_paginate"

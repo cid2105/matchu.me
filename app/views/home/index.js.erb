@@ -1,0 +1,7 @@
+$("div#matches").append("<%= j render :partial => 'users/match', :collection => @matches, :as => :match %>");
+
+<% if @matches.next_page %>
+	$(".pagination").replaceWith('<%= j will_paginate(@matches) %>');
+<% else %>
+	$(".pagination").remove();
+<% end %>
