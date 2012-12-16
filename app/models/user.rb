@@ -118,8 +118,9 @@ class User < ActiveRecord::Base
   end
 
   def map_uid_to_index
-    idx = Resque.redis.hlen "uids"
-    Resque.redis.hset "uids", self.uid, idx
+
+    idx = $redis.hlen "uids"
+    $redis.hset "uids", self.uid, idx
   end
 
 end
