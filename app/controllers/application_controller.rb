@@ -39,6 +39,7 @@ class ApplicationController < ActionController::Base
 
     def authenticate_user!
       if !current_user
+        @match_count = Match.count / 2 + 1
         render 'home/unauthenticated', :layout => 'unauthenticated' 
       end
     end

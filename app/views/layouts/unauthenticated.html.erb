@@ -189,7 +189,7 @@ var Timer,
         var Minutes = Math.floor(Seconds / 60);
         Seconds -= Minutes * (60);
 
-        var TimeStr = '<li><span class="number">' + <%= User.count %> + '</span><span>Columbians</span></li>' + '<li><span class="number">' + <%= Match.count %> + '</span><span>&nbsp;&nbsp;&nbsp;Matches&nbsp;&nbsp;&nbsp;</span></li>';
+        var TimeStr = '<li><span class="number">' + <%= User.count %> + '</span><span>Columbians</span></li>' + '<li><span class="number">' + <%= @match_count %> + '</span><span>&nbsp;&nbsp;&nbsp;Matches&nbsp;&nbsp;&nbsp;</span></li>';
         
         Timer.innerHTML = TimeStr;
     }
