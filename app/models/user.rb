@@ -104,12 +104,12 @@ class User < ActiveRecord::Base
   end
 
   def new_match_count
-    (Resque.redis.hget "new_match_count", id).to_i || 0
+    ($redis.hget "new_match_count", id).to_i || 0
   end
 
   def self.to_autocomplete(term)
     arr = []
-    autocomplete(term).each { |user| arr.push(Hash["id", user.id, "value", user.id, "label",  user.to_s, "uid", user.uid, "name", user.to_s, "avatar", user.thumbnail, "idx", Resque.redis.hget("uids", user.uid), "link", Rails.application.routes.url_helpers.user_path(user)]) }
+    autocomplete(term).each { |user| arr.push(Hash["id", user.id, "value", user.id, "label",  user.to_s, "uid", user.uid, "name", user.to_s, "avatar", user.thumbnail, "idx", $redis.hget("uids", user.uid), "link", Rails.application.routes.url_helpers.user_path(user)]) }
     arr.first(10)
   end
 
@@ -118,7 +118,6 @@ class User < ActiveRecord::Base
   end
 
   def map_uid_to_index
-
     idx = $redis.hlen "uids"
     $redis.hset "uids", self.uid, idx
   end
