@@ -1,0 +1,35 @@
+<a href="#" data-toggle="dropdown" class="btn dropdown-toggle" id="reset_match_count">
+              
+              <i class="icon-user"></i> <%= current_user.to_s.split.first %> &nbsp;
+              <% if current_user.new_match_count > 0 %>
+                <span class="badge badge-important" style="background-color:#B94A48;"><%= current_user.new_match_count %></span> 
+              <% end %>
+
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <% if current_user.new_match_count > 0 %>
+                <li style="padding:15px;">
+                  
+                  <%= render "shared/match_alert" %>
+                  
+                  <li class="divider"></li>
+                  <div id="alert_matches">
+				  <ul>
+                      <% current_user.matches.last(current_user.new_match_count).each do |m| %>
+                       <li> <%= m.matchee %> </li>
+                      <% end %>
+                  </ul>
+                  </div>
+                    
+                </li>
+
+			<li class="divider"></li>
+
+              <% end %>
+              
+              <li><a href="<%= signout_path %>">Sign Out</a></li>
+              
+
+            </ul>
+

@@ -11,10 +11,7 @@ $("ul.thumbnails").html("<%= j render "home/thumbs", :thumb_uids => @thumb_uids 
 
 $("#notify-new-match").jmNotify();
 
-if($("div#alerts a span.badge").length) {
-	var next_val = parseInt($("div#alerts a span.badge").text()) + 1;
-	$("div#alerts a span.badge").text(next_val);
-}	
-else
-	$("div#alerts a span.caret").before("<span class='badge badge-important' style='background-color:#B94A48;'><%= current_user.new_match_count %></span>&nbsp; ");
 
+$("#alerts").html("<%= j render 'matches/alert_matches' %>");
+
+$("#reset_match_count").click(function(e){ e.preventDefault(); $.post("<%= reset_new_match_count_users_path %>", {}); });

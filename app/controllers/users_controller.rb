@@ -7,13 +7,15 @@ class UsersController < ApplicationController
     @likee = User.find_by_uid(params[:uid])
     current_user.like!(@likee)
     current_user.decrement_index
-    reinit_cycle
     
     if current_user.is_new_match?(@likee)
       @match = Match.create_matches(current_user, @likee) 
       @new_match_count = current_user.new_match_count
+      current_user.remove_match_uid(@likee.uid)
+      reinit_cycle
       render "match" 
     else 
+      reinit_cycle
       render "cycle"
     end
 
@@ -66,7 +68,6 @@ class UsersController < ApplicationController
     @center_image_uid = @user.uid
     current_user.update_attributes(index: params[:idx].to_i)
     @thumb_uids = current_user.thumb_uids(params[:idx].to_i)
-    @matches = current_user.matches.map{ |u| User.find(u.match_id) }
     render :cycle
   end
 
@@ -79,7 +80,7 @@ class UsersController < ApplicationController
   end
 
   def reinit_cycle
-    @user = User.all.to_a.at(current_user.index)
+    @user = User.find_by_uid(current_user.view_list.at(current_user.index))
     @center_image_uid = @user.uid
     @thumb_uids = current_user.thumb_uids
   end

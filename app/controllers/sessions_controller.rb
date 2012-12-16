@@ -10,7 +10,11 @@ class SessionsController < ApplicationController
 
     user = User.where(:provider => auth['provider'], :uid => auth['uid'].to_s).first || User.create_with_omniauth(auth)
     
+    Resque.enqueue(AddFbFriends, user.id, auth['credentials']['token']) if user.friends.nil?
+    user.reinit_view_list
+
     user.add_role :admin if User.count == 1 # make the first user an admin
+    
     user.reinit_index
     
     session[:user_id] = user.id

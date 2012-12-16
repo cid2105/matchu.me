@@ -2,11 +2,11 @@ class User < ActiveRecord::Base
   include PgSearch
   rolify
   
-  serialize :unseen, Array
+  serialize :view_list, Array
   serialize :friends, Hash  
 
   attr_accessible :role_ids, :as => :admin
-  attr_accessible :provider, :uid, :name, :email, :friends, :unseen, :index, :school, :year, :major
+  attr_accessible :provider, :uid, :name, :email, :friends, :view_list, :index, :school, :year, :major
 
   has_many :likes, :class_name => 'Like', :foreign_key => 'liker_id'
   has_many :likers, :class_name => 'Like', :foreign_key => 'likee_id' 
@@ -33,18 +33,24 @@ class User < ActiveRecord::Base
     @user
   end
 
+  def remove_match_uid(uid)
+    new_view_list = view_list
+    new_view_list.delete(uid)
+    update_attributes(view_list: new_view_list)
+  end
+
   def thumb_uids(idx = self.index)
     start, fin = (idx-10), (idx-1)
-    arr = User.pluck("uid")
+    arr = view_list
     (start..fin).to_a.each_with_index.map { |x,i| [arr[x], x] }
   end
 
   def increment_index
-    update_attributes(index: (self.index + 1) % User.count)
+    update_attributes(index: (self.index + 1) % (view_list.count))
   end
 
   def decrement_index
-    update_attributes(index: (self.index - 1) % User.count)
+    update_attributes(index: (self.index - 1) % (view_list.count))
   end
 
   def education
@@ -59,8 +65,14 @@ class User < ActiveRecord::Base
     "http://graph.facebook.com/#{uid}/picture?type=#{size}"
   end
 
-  def reinit_unseen
-    User.pluck("uid").shuffle
+  def reinit_view_list
+    all_that_like_me = Like.where(likee_id: self.id).pluck("liker_id")
+    all_that_dont_like_me = (User.pluck("id") - all_that_like_me).shuffle
+    head_size = all_that_like_me.count
+    all_that_dont_like_me_head, all_that_dont_like_me_rest = all_that_dont_like_me.partition.each_with_index { |i, x| x < (head_size) }
+    new_view_list = ((all_that_dont_like_me_head | all_that_like_me).shuffle + all_that_dont_like_me_rest) - matches.pluck("match_id")
+    new_view_list = User.find(new_view_list).map(&:uid)
+    update_attributes(view_list: new_view_list, index: rand(new_view_list.count) )
   end
 
   def to_s
@@ -93,11 +105,6 @@ class User < ActiveRecord::Base
 
   def new_match_count
     (Resque.redis.hget "new_match_count", id).to_i || 0
-  end
-
-  def remove_seen(seen)
-    self.unseen.delete seen
-    self.update_attributes(unseen: unseen)
   end
 
   def self.to_autocomplete(term)
