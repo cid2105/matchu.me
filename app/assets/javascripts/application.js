@@ -11,8 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //= require jquery
 //= require jquery_ujs
-//= require token_input
-//= require_tree .
+
 //= require_self
 
 $(document).ready(function() {
