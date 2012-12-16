@@ -1,3 +1,3 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :facebook, '281924215243523', 'ba907877eccfdbd398237954040191d0', :scope => 'email, user_education_history, friends_education_history'
+  provider :facebook, Constants::FACEBOOK_APP_ID, Constants::FACEBOOK_SECRET, :scope => 'email, user_education_history, friends_education_history'
 end

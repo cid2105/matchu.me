@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   serialize :friends, Hash  
 
   attr_accessible :role_ids, :as => :admin
-  attr_accessible :provider, :uid, :name, :email, :friends, :unseen, :index
+  attr_accessible :provider, :uid, :name, :email, :friends, :unseen, :index, :school, :year, :major
 
   has_many :likes, :class_name => 'Like', :foreign_key => 'liker_id'
   has_many :likers, :class_name => 'Like', :foreign_key => 'likee_id' 
@@ -16,8 +16,11 @@ class User < ActiveRecord::Base
 
   pg_search_scope :search, :against => {:name => 'A', :email => 'B'}, :using => {:tsearch => {:dictionary => "english", :prefix => true}}
   scope :autocomplete, lambda { |term| where("name ILIKE '%#{term}%'") } 
+  after_create :map_uid_to_index
 
-  before_create :init_index
+  def self.all_but_my_uid(uid)
+    where(['uid not in (?)', uid]).pluck("uid")
+  end
 
   def self.create_with_omniauth(auth)
     @user = User.create(provider: auth['provider'], uid: auth['uid'])
@@ -28,6 +31,24 @@ class User < ActiveRecord::Base
     end
     Resque.enqueue(AddFbFriends, @user.id, auth['credentials']['token'])
     @user
+  end
+
+  def thumb_uids(idx = self.index)
+    start, fin = (idx-10), (idx-1)
+    arr = User.pluck("uid")
+    (start..fin).to_a.each_with_index.map { |x,i| [arr[x], x] }
+  end
+
+  def increment_index
+    update_attributes(index: (self.index + 1) % User.count)
+  end
+
+  def decrement_index
+    update_attributes(index: (self.index - 1) % User.count)
+  end
+
+  def education
+    "#{school} #{year}"
   end
 
   def thumbnail
@@ -51,7 +72,11 @@ class User < ActiveRecord::Base
   end
 
   def likes?(likee)
-    likes.include?(likee)
+    likes.pluck("likee_id").include?(likee.id)
+  end
+
+  def is_new_match?(likee)
+    (likee.likes? self and not self.matches.pluck("match_id").include? likee.id)
   end
 
   def view!(other)
@@ -66,6 +91,10 @@ class User < ActiveRecord::Base
     matches.create(match_id: matched.id)
   end
 
+  def new_match_count
+    (Resque.redis.hget "new_match_count", id).to_i || 0
+  end
+
   def remove_seen(seen)
     self.unseen.delete seen
     self.update_attributes(unseen: unseen)
@@ -73,13 +102,17 @@ class User < ActiveRecord::Base
 
   def self.to_autocomplete(term)
     arr = []
-    autocomplete(term).each { |user| arr.push(Hash["id", user.id, "value", user.id, "label", user.to_s, "name", user.to_s, "avatar", user.thumbnail, "link", Rails.application.routes.url_helpers.user_path(user)]) }
+    autocomplete(term).each { |user| arr.push(Hash["id", user.id, "value", user.id, "label",  user.to_s, "uid", user.uid, "name", user.to_s, "avatar", user.thumbnail, "idx", Resque.redis.hget("uids", user.uid), "link", Rails.application.routes.url_helpers.user_path(user)]) }
     arr.first(10)
   end
 
-  private
-
-  def init_index
-    self.index = rand(User.count)
+  def reinit_index
+    update_attributes(index: rand(User.count))
   end
+
+  def map_uid_to_index
+    idx = Resque.redis.hlen "uids"
+    Resque.redis.hset "uids", self.uid, idx
+  end
+
 end

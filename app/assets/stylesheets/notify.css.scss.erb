@@ -1,0 +1,42 @@
+/* CSS Document */
+
+.fbNotify{
+	position:fixed;
+	left:20px;
+	bottom:30px;
+	padding:10px 30px 10px 10px;
+	background:#e1e6ee;
+	border:1px solid #99a8c7;
+	border-radius:3px;	
+	-moz-border-radius:3px;	
+	-webkit-border-radius:3px;
+	color:#6179c8;
+	font-size:11px;
+	display:none;
+	cursor:pointer;
+	z-index:999;
+}
+
+.fbNotify span{
+	background:url(<%= asset_path "fb_message.png"%>) top left no-repeat;
+	padding:3px 0 3px 20px;
+	float:left;
+}
+
+.fbNotify .jm-close{
+	position:absolute;
+	top:10px;
+	right:10px;
+	width:7px;
+	height:8px;
+	background:url(<%= asset_path "fb_close.png"%>);
+	display:none;
+}
+
+.fbNotify:hover{
+	background:#cad1de;
+}
+
+.fbNotify:hover .jm-close{
+	display:block;
+}

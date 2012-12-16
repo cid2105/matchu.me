@@ -18,11 +18,15 @@
 $(document).ready(function() {
   /* Activating Best In Place */
 	//jQuery(".best_in_place").best_in_place();
-	$("[rel*='popover']").popover();
-	$("[rel*='captify']").captify();
+	$(".popover").popover();
+
+	$("[rel*='popover']").popover({trigger:'hover', placement:'right', html : true});
+	
+	//setTimeout($.get("/poll"), 10000);	
+
 	$("[rel*='tooltip']").tooltip();
 	$('.dropdown-toggle').dropdown();
-	$('.combobox').combobox();
+	
 	$('.dropdown form').on('click', function (e) {
 		e.stopPropagation()
 	});

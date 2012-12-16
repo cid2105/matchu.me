@@ -343,6 +343,9 @@
  */
 .ui-autocomplete { position: absolute; cursor: default; }	
 
+.ui-autocomplete ul a:hover, .ui-autocomplete ul p:hover { 
+	text-decoration: none;
+}
 /* workarounds */
 * html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
 

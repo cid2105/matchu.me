@@ -15,18 +15,36 @@
               <input type="text" placeholder="Search a crush..." class="search-query token_input" id="searchInput">
             <% end %>
             
-         <div class="btn-group pull-right">
+         <div class="btn-group pull-right" id="alerts">
 
-            <a href="#" data-toggle="dropdown" class="btn dropdown-toggle">
-              <i class="icon-user"></i> <%= current_user.to_s.split.first %> &nbsp;<span class="badge badge-important" style="background-color:#B94A48;">2</span> 
+            <a href="#" data-toggle="dropdown" class="btn dropdown-toggle" >
+              
+              <i class="icon-user"></i> <%= current_user.to_s.split.first %> &nbsp;
+              <% if current_user.new_match_count > 0 %>
+                <span class="badge badge-important" style="background-color:#B94A48;"><%= current_user.new_match_count %></span> 
+              <% end %>
+
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li style="padding:15px;">
-                  <span class="badge badge-important" style="background-color:#B94A48;">2</span>&nbsp; New Matches!
-              </li>
-              <li class="divider"></li>
+              <% if current_user.new_match_count > 0 %>
+                <li style="padding:15px;">
+                  
+                  <%= render "shared/match_alert" %>
+                  
+                  <li class="divider"></li>
+                  <ul>
+                      <% current_user.matches.first(current_user.new_match_count).each do |m| %>
+                       <li> <%= User.find(m.match_id) %> </li>
+                      <% end %>
+                  </ul>
+                    
+                </li>
+                <li class="divider"></li>
+              <% end %>
+              
               <li><a href="<%= signout_path %>">Sign Out</a></li>
+              
 
             </ul>
           </div>

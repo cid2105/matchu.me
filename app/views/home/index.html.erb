@@ -10,18 +10,10 @@
 
 
 <div class="score-container">
-  <a href="/users/ipk9vr4j/following"><h4>Matches (1)</h4></a> 
-        <div class="friend-unit">
-	       	<div class="friend-photo">
-			  <a href="/users/k2qjkvf1">
-			    <img src="http://graph.facebook.com/1381200197/picture?type=square" alt="Picture?type=square">
-</a>			</div>
-			<div class="friend-name">
-			   <a href="/users/k2qjkvf1">
-			     Alex Ingram
-</a>			</div>
-			<div class="float-break"></div>
-	    </div>
+  <a href="/users/ipk9vr4j/following"><h4>Matches (<%= current_user.matches.count %>)</h4></a> 
+	<div id="matches">
+		<%= render :partial => 'users/match', :collection => @matches, :as => :match %>
+	</div>
 </div>
   </div>
 
@@ -33,28 +25,38 @@
 	  		<div class="span11">
 				
 
-				<div class="thumbnail well">
+				<div class="thumbnail well" style="height:580px;">
 
 					<div class="row-fluid" style="margin-left:30px;">
-			            <ul class="thumbnails">
+
+			            <ul class="thumbnails" style="padding-top:20px;">
 			              <%= render "thumbs", :thumb_uids => @thumb_uids %>
 			            </ul>
+			            
           			</div>
-
-
-          		  	<br/><br/>
-                	<img alt="300x200"  uid="<%= @center_image_uid %>" src="http://graph.facebook.com/<%= @center_image_uid %>/picture?type=large" center>
-    				
-    				<div style="padding:38px 49px 44px 0px;">
+          			<hr style="position:relative; bottom:20px;"/>
+          		
+                 			
+                			<div style="padding:38px 49px 44px 0px;">
       			
-      				<div  style="margin-left: 336px;" >
+      				<div  style="margin-left: 336px; position:absolute; top: 135px; left: 2px;" >
 
     		              <a class="btn btn-circle btn-cq" rel="tooltip" title="Previous" href="#" id="prev"><i class="icon-chevron-left"></i></a>
-	        	          <a class="btn btn-circle btn-danger" style="margin-left:10px;" rel="tooltip" title="Match!" href="#" id="match"><i class="icon-heart"></i></a>
-                  		  <a class="btn btn-circle btn-cq" style="margin-left:10px;" rel="tooltip" href="#" title="Next"  id="next"><i class="icon-chevron-right"></i></a>
+	        	          <a class="btn btn-circle btn-danger" style="margin-left:11px;" rel="tooltip" title="Match!" href="#" id="match"><i class="icon-heart"></i></a>
+                  		  <a class="btn btn-circle btn-cq" style="margin-left:11px;" rel="tooltip" href="#" title="Next"  id="next"><i class="icon-chevron-right"></i></a>
 
               		</div>
-                 	</div>
+                 	</div>      
+
+                 	<div class="polaroid">
+						<h6><%= @user %></h6>
+						<img title="<%= @user %>" data-content="<%= @user.education %><br/><br/><%= @user.major %>" rel="popover" uid="<%= @center_image_uid %>" src="http://graph.facebook.com/<%= @center_image_uid %>/picture?type=large" center>
+					</div>
+
+        </div>
+
+    				
+    				
 
                 
 	                <!--     <table> <tr>
@@ -70,14 +72,22 @@
                 </div>
 
 			</div>
- <hr/>
-<p style="text-align:center;" class="footer">&copy; MatchU.Me 2011-2012</p>				
+ 
+
 
 <script>
 
+
+
+$(document).on('click', "ul.thumbnails a, ul.ui-autocomplete a", function (e) {
+	e.preventDefault();
+	var uid = $(this).find("img").attr("uid");
+	var idx = $(this).find("img").attr("idx");
+	$.post("<%= goto_users_path %>", {uid: uid, idx: idx});
+});
+
 $("a#match").click(function(){
 	var uid = $("img[center]").attr("uid");
-	
 	$.post("<%= like_users_path %>", {uid: uid});
 });
 
@@ -95,12 +105,17 @@ $("a#next").click(function(){
             source: "<%= autocomplete_users_path %>",
             minLength: 1
         }).data( "autocomplete" )._renderItem = function( ul, item ) {
-            var inner_html = '<p><img error="" src="' + item.avatar + '"> ' + item.label + '<br/></p>';
-            return $('<a href="' + item.link + '"><li circle="none"></li></a>"')
-                .data( "item.autocomplete", item )
+            var inner_html = '<p style="padding:5px;  border: 1px solid #DDDDDD; border-radius: 4px 4px 4px 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);"><img  idx="' + item.idx + '" uid="' + item.uid + '" error="" src="' + item.avatar + '"> ' + item.label + '<br/></p>';
+            return $('<a href="#"><li circle="none"></li></a>"')
                 .append(inner_html)
+                .data( "item.autocomplete", item )
                 .appendTo( ul );
     };
 
+
+$("#alerts a").click(function(e){
+	e.preventDefault();
+	$.post("<%= reset_new_match_count_users_path %>", {});
+});
 
 </script>

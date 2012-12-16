@@ -2,6 +2,8 @@ Matchume::Application.routes.draw do
  
   root :to => "home#index"
 
+  # match '/poll' => 'home#poll', :as => :poll, :via => :get
+
   resources :users, :only => [:index, :show, :edit, :update ] do
   	collection do
       get 'search'
@@ -9,6 +11,8 @@ Matchume::Application.routes.draw do
       post 'like'
       post 'prev'
       post 'next'
+      post 'goto'
+      post 'reset_new_match_count'
     end
 
   end

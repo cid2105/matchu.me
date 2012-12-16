@@ -1,5 +1,5 @@
 class AddIndexToUser < ActiveRecord::Migration
   def change
-    add_column :users, :index, :integer, :default => 0
+    add_column :users, :index, :integer
   end
 end

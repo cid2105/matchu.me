@@ -1,7 +1,7 @@
-<% thumb_uids.each do |thumb| %>
+<% thumb_uids.each do |thumb, idx| %>
 	<li>
 		<a class="thumbnail" href="#">
-  			<img src="http://graph.facebook.com/<%= thumb %>/picture?type=square" >
+  			<img src="http://graph.facebook.com/<%= thumb %>/picture?type=square" alt="" idx="<%= idx %>" uid="<%= thumb %>">
 		</a>
 	</li>
 <% end %>

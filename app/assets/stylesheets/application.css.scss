@@ -321,3 +321,30 @@ ul.guide_items img {
     overflow: scroll;
 }
 
+.polaroid {
+  position: relative;
+  width: 220px;
+  left: 320px;
+  bottom: 20px;
+}
+ 
+.polaroid img {
+  border: 10px solid #fff;
+  border-bottom: 45px solid #fff;
+  -webkit-box-shadow: 3px 3px 3px #777;
+     -moz-box-shadow: 3px 3px 3px #777;
+          box-shadow: 3px 3px 3px #777;
+  
+  
+}
+ 
+.polaroid h6 {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  bottom: 10px;  
+  right: 10px;
+  z-index: 10000;
+  color: #888;
+}
+
