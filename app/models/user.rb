@@ -70,9 +70,9 @@ class User < ActiveRecord::Base
     all_that_dont_like_me = (User.pluck("id") - all_that_like_me).shuffle
     head_size = all_that_like_me.count
     all_that_dont_like_me_head, all_that_dont_like_me_rest = all_that_dont_like_me.partition.each_with_index { |i, x| x < (head_size) }
-    new_view_list = ((all_that_dont_like_me_head | all_that_like_me).shuffle + all_that_dont_like_me_rest) - matches.pluck("match_id")
+    new_view_list = ((all_that_dont_like_me_head | all_that_like_me).shuffle + all_that_dont_like_me_rest) - matches.pluck("match_id") - [id]
     new_view_list = User.find(new_view_list).map(&:uid)
-    update_attributes(view_list: new_view_list, index: rand(new_view_list.count) )
+    update_attributes(view_list: new_view_list, index: 0)
   end
 
   def to_s
