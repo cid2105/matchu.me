@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   end
 
   def self.create_with_omniauth(auth)
-    @user = User.create(provider: auth['provider'], uid: auth['uid'])
+    @user = User.create(provider: auth['provider'], uid: auth['uid'], view_list: User.pluck("id") )
     if auth['info'] 
         @user.name = auth['info']['name'] || ""
         @user.email = auth['info']['email'] || ""
