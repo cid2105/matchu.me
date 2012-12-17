@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_id_set_and_get_uid(id_set)
-    find_each = lambda {|user_id| find(user_id).uid }
+    find_each = lambda {|user_id| find(user_id).uid if exists?(user_id) }
     id_set.map(&find_each)
   end
 
