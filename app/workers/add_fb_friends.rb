@@ -13,7 +13,11 @@ class AddFbFriends
         next if not year.nil? and year.to_i < 2011
         school =  hash['education'][1]['school']['name']
         index = rand(User.count)
-        User.where(name: hash['name'], uid: hash['id'], school: school, major: major, year: year, index: index).first_or_create
+        
+        unless User.exists?(uid: hash['id'])
+          User.create(name: hash['name'], uid: hash['id'], school: school, major: major, year: year, index: index)
+        end
+
         friends_hash[hash['name']] = hash['id']
       end
     end
