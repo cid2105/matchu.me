@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
     
     Resque.enqueue(AddFbFriends, user.id, auth['credentials']['token']) if user.friends.nil?
     user.reinit_view_list
+    
     session[:user_id] = user.id
     
     if user.email.blank?

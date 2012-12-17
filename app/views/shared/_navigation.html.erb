@@ -11,8 +11,8 @@
             style="color: #06f;">me</span></a>
             <div class="divider"></div>
 
-            <%= form_tag "#", :id => 'searchForm', :class => "navbar-search", :style => "position:absolute; left: 320px;" do |f| %>
-              <input type="text" placeholder="Search a crush..." class="search-query token_input" id="searchInput">
+            <%= form_tag search_users_path, :method => :get, :id => 'searchForm', :class => "navbar-search", :remote => true, :style => "position:absolute; left: 320px;" do |f| %>
+              <input type="text" placeholder="Search a crush..." class="search-query token_input" id="searchInput" name="searched_name">
             <% end %>
             
          <div class="btn-group pull-right" id="alerts">

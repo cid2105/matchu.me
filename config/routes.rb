@@ -4,7 +4,7 @@ Matchume::Application.routes.draw do
 
   # match '/poll' => 'home#poll', :as => :poll, :via => :get
 
-  resources :users, :only => [:index, :show, :edit, :update, :destroy] do
+  resources :users, :only => [:index, :edit, :update, :destroy] do
   	collection do
       get 'search'
       get 'autocomplete'

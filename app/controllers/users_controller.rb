@@ -22,11 +22,12 @@ class UsersController < ApplicationController
   end
 
   def search
-    @users = User.search(params[:term]).where(:active => true).paginate(:page => params[:page], :per_page => 10)
-    @sidebar = true 
-    respond_to do |format|
-      format.html
-      format.js { render :json => @users }
+    @users = User.search(params[:searched_name]) 
+    if @users.size > 0
+      @user, @center_image_uid, idx = @users.first, @users.first.uid, $redis.hget("uids", @users.first.uid)
+      current_user.update_attributes(index: idx.to_i)
+      @thumb_uids = current_user.thumb_uids(idx.to_i)
+      render :cycle
     end
   end
 
@@ -73,10 +74,6 @@ class UsersController < ApplicationController
 
   def reset_new_match_count
     Match.zero_match_count_for_user(current_user)
-  end
-
-  def show
-    @user = User.find(params[:id])
   end
 
   def destroy

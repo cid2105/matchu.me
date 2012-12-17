@@ -8,13 +8,15 @@ class User < ActiveRecord::Base
   attr_accessible :role_ids, :as => :admin
   attr_accessible :provider, :uid, :name, :email, :friends, :view_list, :index, :school, :year, :major
 
-  
+  has_many :likes, :foreign_key => "liker_id"
+  has_many :liked_users, :through => :likes, :source => :liked, :foreign_key => "likee_id"
 
-  has_many :likes, :class_name => 'Like', :foreign_key => 'liker_id'
-  has_many :likers, :class_name => 'Like', :foreign_key => 'likee_id' 
-  has_many :viewed_users, :class_name => 'View', :foreign_key => 'viewer_id'
-  has_many :viewers, :class_name => 'View', :foreign_key => 'viewee_id' 
-  has_many :matches, :class_name => 'Match', :foreign_key => 'user_id'  
+  has_many :inverse_likes, :foreign_key => "likee_id", :class_name => "Like"
+  has_many :liked_by_users, :through => :inverse_likes, :source => :liker, :foreign_key => "liker_id"
+  
+  has_many :matches
+  has_many :matched_users, :through => :matches, :source => :matched_user
+  # has_many :matches, :class_name => 'Match', :foreign_key => 'user_id'  
 
   pg_search_scope :search, :against => {:name => 'A', :email => 'B'}, :using => {:tsearch => {:dictionary => "english", :prefix => true}}
   scope :autocomplete, lambda { |term| where("name ILIKE '%#{term}%'") } 

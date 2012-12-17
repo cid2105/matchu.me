@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
 	before_filter :authenticate_user!
   	
-  	def index
+  	def index  		
+  		puts current_user.name
   		@user = User.find_by_uid(current_user.view_list.at(current_user.index))
   		@center_image_uid = @user.uid
   		@thumb_uids = current_user.thumb_uids
