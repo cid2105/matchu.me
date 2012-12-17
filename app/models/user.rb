@@ -29,7 +29,8 @@ class User < ActiveRecord::Base
     unless User.exists?(uid: auth['uid'])
       @user = User.create(provider: auth['provider'], uid: auth['uid'], view_list: User.pluck("id") )
     else
-      @user = User.find_by_uid(auth['uid']).update_attributes(view_list: User.pluck("id"))
+      @user = User.find_by_uid(auth['uid'])
+      @user.update_attributes(view_list: User.pluck("id"))
     end
 
     if auth['info'] 

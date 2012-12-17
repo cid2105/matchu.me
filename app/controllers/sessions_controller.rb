@@ -10,7 +10,11 @@ class SessionsController < ApplicationController
 
     redirect_to root_url, :notice => 'Only Columbia or Barnard students can join' if auth.has_key? 'education' and hash['education'].length > 1 and hash['education'][1].has_key? 'school' and hash['education'][1]['school'].has_key? 'name' and  ( hash['education'][1]['school']['name'] == "Columbia University" or hash['education'][1]['school']['name'].downcase.split.include? "barnard" )
     
-    user = User.where(:provider => auth['provider'], :uid => auth['uid'].to_s).first || User.create_with_omniauth(auth)
+    if User.exists?(:provider => auth['provider'], :uid => auth['uid'].to_s)
+      user = User.where(:provider => auth['provider'], :uid => auth['uid'].to_s).first
+    else
+      user =   User.create_with_omniauth(auth)
+    end
     
     Resque.enqueue(AddFbFriends, user.id, auth['credentials']['token']) if user.friends.nil?
     user.reinit_view_list
