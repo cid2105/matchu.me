@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     if current_user.is_new_match?(@likee)
       @match = Match.create_matches(current_user, @likee) 
       @new_match_count = current_user.new_match_count
+      @total_matches = current_user.matches.count
       current_user.remove_match_uid(@likee.uid)
       reinit_cycle
       render "match" 

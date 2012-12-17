@@ -11,6 +11,8 @@ $("ul.thumbnails").html("<%= j render "home/thumbs", :thumb_uids => @thumb_uids 
 
 $("#notify-new-match").jmNotify();
 
+$("#match_count").text("(<%= @total_matches %>)");
+$("#matches").append("<%= j render 'users/match', :match => @match %> ");
 
 $("#alerts").html("<%= j render 'matches/alert_matches' %>");
 

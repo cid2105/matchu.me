@@ -10,7 +10,7 @@
 
 
 <div class="score-container">
-  <a href="/users/ipk9vr4j/following"><h4>Matches (<%= current_user.matches.count %>)</h4></a> 
+  <a href="/users/ipk9vr4j/following"><h4>Matches <span id="match_count">(<%= current_user.matches.count %>)</span></h4></a> 
 	<div id="matches">
 		<%= render :partial => 'users/match', :collection => @matches, :as => :match %>		
 	</div>
