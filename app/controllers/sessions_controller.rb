@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
     auth = request.env["omniauth.auth"]
 
     redirect_to root_url, :notice => 'Only Columbia or Barnard students can join' if auth.has_key? 'education' and hash['education'].length > 1 and hash['education'][1].has_key? 'school' and hash['education'][1]['school'].has_key? 'name' and  ( hash['education'][1]['school']['name'] == "Columbia University" or hash['education'][1]['school']['name'].downcase.split.include? "barnard" )
+    
     user = User.where(:provider => auth['provider'], :uid => auth['uid'].to_s).first || User.create_with_omniauth(auth)
     
     Resque.enqueue(AddFbFriends, user.id, auth['credentials']['token']) if user.friends.nil?
