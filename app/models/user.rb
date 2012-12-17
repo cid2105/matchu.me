@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   attr_accessible :role_ids, :as => :admin
   attr_accessible :provider, :uid, :name, :email, :friends, :view_list, :index, :school, :year, :major
 
-  validates :uid, :uniqueness => true
+  
 
   has_many :likes, :class_name => 'Like', :foreign_key => 'liker_id'
   has_many :likers, :class_name => 'Like', :foreign_key => 'likee_id' 
