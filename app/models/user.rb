@@ -24,6 +24,16 @@ class User < ActiveRecord::Base
     where(['uid not in (?)', uid]).pluck("uid")
   end
 
+  def self.find_by_id_set(id_set)
+    find_each = lambda {|user_id| find(user_id) }
+    id_set.map(&find_each)
+  end
+
+  def self.find_by_id_set_and_get_uid(id_set)
+    find_each = lambda {|user_id| find(user_id).uid }
+    id_set.map(&find_each)
+  end
+
   def self.create_with_omniauth(auth)
     
     unless User.exists?(uid: auth['uid'])
@@ -79,9 +89,9 @@ class User < ActiveRecord::Base
     all_that_dont_like_me = (User.pluck("id") - all_that_like_me).shuffle
     head_size = all_that_like_me.count
     all_that_dont_like_me_head, all_that_dont_like_me_rest = all_that_dont_like_me.partition.each_with_index { |i, x| x < (head_size) }
-    new_view_list = ((all_that_dont_like_me_head | all_that_like_me).shuffle + all_that_dont_like_me_rest) - matches.pluck("match_id") - [id]
-    new_view_list = User.find(new_view_list).map(&:uid)
-    update_attributes(view_list: new_view_list, index: 0)
+    new_view_list = ((all_that_dont_like_me_head | all_that_like_me).shuffle + all_that_dont_like_me_rest.shuffle) - matches.pluck("match_id") - [id]
+    new_view_list = User.find_by_id_set_and_get_uid(new_view_list)
+    self.update_attributes(view_list: new_view_list, index: 0)
   end
 
   def to_s
