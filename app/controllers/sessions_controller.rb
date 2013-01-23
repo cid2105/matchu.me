@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       user =   User.create_with_omniauth(auth)
     end
     
-    Resque.enqueue(AddFbFriends, user.id, auth['credentials']['token']) if user.friends.nil?
+    #Resque.enqueue(AddFbFriends, user.id, auth['credentials']['token']) if user.friends.nil?
     user.reinit_view_list
     
     session[:user_id] = user.id

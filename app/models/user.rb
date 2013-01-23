@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
         @user.email = auth['info']['email'] || ""
         @user.save
     end
-    Resque.enqueue(AddFbFriends, @user.id, auth['credentials']['token'])
+    # Resque.enqueue(AddFbFriends, @user.id, auth['credentials']['token'])
     @user
   end
 
