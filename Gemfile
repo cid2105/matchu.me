@@ -47,5 +47,7 @@ gem "omniauth-facebook"
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
 gem "koala"
-gem 'resque', :require => "resque/server"
+# gem 'resque', :require => "resque/server"
+gem "redis"
+gem 'delayed_job_active_record'
 gem "will_paginate"

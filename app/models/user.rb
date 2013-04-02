@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
         @user.email = auth['info']['email'] || ""
         @user.save
     end
-    Resque.enqueue(AddFbFriends, @user.id, auth['credentials']['token'])
+    @user.delay.add_fb_friends(auth['credentials']['token'])
     @user
   end
 
@@ -94,6 +94,30 @@ class User < ActiveRecord::Base
     new_view_list = ((all_that_dont_like_me_head | all_that_like_me).shuffle + all_that_dont_like_me_rest.shuffle) - matches.pluck("match_id") - [id]
     new_view_list = User.find_by_id_set_and_get_uid(new_view_list)
     self.update_attributes(view_list: new_view_list, index: 0)
+  end
+
+  def add_fb_friends(token)
+    @facebook = Koala::Facebook::API.new(token)
+    friends_hash = Hash.new
+ 
+    @facebook.get_connections("me", "friends", :fields => "name, email, id, education").each do |hash|
+      if hash.has_key? 'education' and hash['education'].length > 1 and hash['education'][1].has_key? 'school' and hash['education'][1]['school'].has_key? 'name' and  ( hash['education'][1]['school']['name'] == "Columbia University" or hash['education'][1]['school']['name'].downcase.split.include? "barnard" )
+        college = hash['education'][1]
+        major = (college.has_key? 'concentration')? college['concentration'].map {|c| c['name']}.join(' ') : nil        
+        year = (college.has_key?('year')) ? college['year']['name'] : nil
+        next if not year.nil? and year.to_i < 2011
+        school =  hash['education'][1]['school']['name']
+        index = rand(User.count)
+        
+        unless User.exists?(uid: hash['id'])
+          User.create(name: hash['name'], uid: hash['id'], school: school, major: major, year: year, index: index)
+        end
+
+        friends_hash[hash['name']] = hash['id']
+      end
+    end
+
+    update_attributes(friends: friends_hash)
   end
 
   def to_s
