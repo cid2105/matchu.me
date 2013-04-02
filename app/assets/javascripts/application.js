@@ -11,8 +11,8 @@
 // GO AFTER THE REQUIRES BELOW.
 //= require jquery
 //= require jquery_ujs
-//= require token_input
 //= require_tree .
+//= require token_input
 //= require_self
 
 $(document).ready(function() {
@@ -31,16 +31,16 @@ $(document).ready(function() {
 		e.stopPropagation()
 	});
 
-	$("#extruderLeft").buildMbExtruder({
-		position:"left",
-		top:300,
-		extruderOpacity:1,
-		hidePanelsOnClose:false,
-		accordionPanels:false,
-		onExtOpen:function(){},
-		onExtContentLoad:function(){$("#extruderLeft").openPanel();},
-		onExtClose:function(){}
-	});
+	// $("#extruderLeft").buildMbExtruder({
+	// 	position:"left",
+	// 	top:300,
+	// 	extruderOpacity:1,
+	// 	hidePanelsOnClose:false,
+	// 	accordionPanels:false,
+	// 	onExtOpen:function(){},
+	// 	onExtContentLoad:function(){$("#extruderLeft").openPanel();},
+	// 	onExtClose:function(){}
+	// });
 
 });
 
